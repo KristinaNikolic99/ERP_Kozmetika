@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ac7883a80c6a49639552071e2c68dc61" Name="Diagram1">
+        <EntityTypeShape EntityType="Kozmetika2Model.Alergija" Width="1.5" PointX="3" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kozmetika2Model.Brend" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kozmetika2Model.DetaljiAlergija" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kozmetika2Model.Grad" Width="1.5" PointX="1.5" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kozmetika2Model.Korisnik" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kozmetika2Model.Porudzbina" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kozmetika2Model.Prodavnica" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kozmetika2Model.Proizvod" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kozmetika2Model.RecenzijaProizvoda" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kozmetika2Model.SlikaProdavnice" Width="1.5" PointX="3" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kozmetika2Model.SlikaProizvoda" Width="1.5" PointX="5.25" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kozmetika2Model.SlikeBrenda" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kozmetika2Model.StavkaPorudzbine" Width="1.5" PointX="8.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kozmetika2Model.VrstaProizvoda" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="Kozmetika2Model.FK__DetaljiAl__Alerg__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="Kozmetika2Model.FK__Proizvod__BrendI__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="Kozmetika2Model.FK__SlikeBren__Brend__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="Kozmetika2Model.FK__DetaljiAl__Koris__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="Kozmetika2Model.FK__Prodavnic__GradI__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="Kozmetika2Model.FK__Porudzbin__Koris__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="Kozmetika2Model.FK__Recenzija__Koris__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="Kozmetika2Model.FK__StavkaPor__Porud__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="Kozmetika2Model.FK__Proizvod__Prodav__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="Kozmetika2Model.FK__SlikaProd__Proda__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="Kozmetika2Model.FK__Proizvod__VrstaP__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="Kozmetika2Model.FK__Recenzija__Proiz__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="Kozmetika2Model.FK__SlikaProi__Proiz__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="Kozmetika2Model.FK__StavkaPor__Proiz__3D5E1FD2" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

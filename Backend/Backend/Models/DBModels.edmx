@@ -1,0 +1,944 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Kozmetika2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alergija">
+          <Key>
+            <PropertyRef Name="AlergijaID" />
+          </Key>
+          <Property Name="AlergijaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NazivAlergije" Type="varchar" MaxLength="51" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Brend">
+          <Key>
+            <PropertyRef Name="BrendID" />
+          </Key>
+          <Property Name="BrendID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NazivBrenda" Type="varchar" MaxLength="56" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetaljiAlergija">
+          <Key>
+            <PropertyRef Name="DetaljiAlergijaID" />
+          </Key>
+          <Property Name="DetaljiAlergijaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KorisnikID" Type="int" Nullable="false" />
+          <Property Name="AlergijaID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grad">
+          <Key>
+            <PropertyRef Name="GradID" />
+          </Key>
+          <Property Name="GradID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NazivGrada" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="PostanskiBroj" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Korisnik">
+          <Key>
+            <PropertyRef Name="KorisnikID" />
+          </Key>
+          <Property Name="KorisnikID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipKorisnika" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="Ime" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="Prezime" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="Kontakt" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="Adresa" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="BrojStana" Type="int" />
+          <Property Name="UkupnoStanjeBodova" Type="int" />
+        </EntityType>
+        <EntityType Name="Porudzbina">
+          <Key>
+            <PropertyRef Name="PorudzbinaID" />
+          </Key>
+          <Property Name="PorudzbinaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CenaPorudzbine" Type="int" Nullable="false" />
+          <Property Name="Datum" Type="datetime" Nullable="false" />
+          <Property Name="Isplata" Type="bit" Nullable="false" />
+          <Property Name="Zahtev" Type="bit" Nullable="false" />
+          <Property Name="Komentar" Type="varchar" MaxLength="199" />
+          <Property Name="NacinPlacanja" Type="varchar" MaxLength="51" Nullable="false" />
+          <Property Name="KorisnikID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Prodavnica">
+          <Key>
+            <PropertyRef Name="ProdavnicaID" />
+          </Key>
+          <Property Name="ProdavnicaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NazivProdavnice" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="Kontakt" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="Opis" Type="varchar" MaxLength="1999" Nullable="false" />
+          <Property Name="Adresa" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="RadnoVreme" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="GradID" Type="int" />
+        </EntityType>
+        <EntityType Name="Proizvod">
+          <Key>
+            <PropertyRef Name="ProizvodID" />
+          </Key>
+          <Property Name="ProizvodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NazivProizvoda" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="Cena" Type="int" Nullable="false" />
+          <Property Name="Opis" Type="varchar" MaxLength="1199" Nullable="false" />
+          <Property Name="OcenaProizvoda" Type="int" Nullable="false" />
+          <Property Name="VrstaProidvodaID" Type="int" />
+          <Property Name="BrendID" Type="int" />
+          <Property Name="ProdavnicaID" Type="int" />
+        </EntityType>
+        <EntityType Name="RecenzijaProizvoda">
+          <Key>
+            <PropertyRef Name="RecenzijaProizvodaID" />
+          </Key>
+          <Property Name="RecenzijaProizvodaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ocena" Type="int" Nullable="false" />
+          <Property Name="Komentar" Type="varchar" MaxLength="1199" Nullable="false" />
+          <Property Name="Datum" Type="datetime" Nullable="false" />
+          <Property Name="Odobrena" Type="bit" />
+          <Property Name="ProizvodID" Type="int" />
+          <Property Name="KorisnikID" Type="int" />
+        </EntityType>
+        <EntityType Name="SlikaProdavnice">
+          <Key>
+            <PropertyRef Name="SlikaProdavniceID" />
+          </Key>
+          <Property Name="SlikaProdavniceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Putanja" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="ProdavnicaID" Type="int" />
+        </EntityType>
+        <EntityType Name="SlikaProizvoda">
+          <Key>
+            <PropertyRef Name="SlikaID" />
+          </Key>
+          <Property Name="SlikaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Putanja" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="ProizvodID" Type="int" />
+        </EntityType>
+        <EntityType Name="SlikeBrenda">
+          <Key>
+            <PropertyRef Name="SlikeBrendaID" />
+          </Key>
+          <Property Name="SlikeBrendaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Putanja" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="BrendID" Type="int" />
+        </EntityType>
+        <EntityType Name="StavkaPorudzbine">
+          <Key>
+            <PropertyRef Name="StavkaPorudzbineID" />
+          </Key>
+          <Property Name="StavkaPorudzbineID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KolicinaProizvoda" Type="int" Nullable="false" />
+          <Property Name="ProizvodID" Type="int" />
+          <Property Name="PorudzbinaID" Type="int" />
+        </EntityType>
+        <EntityType Name="VrstaProizvoda">
+          <Key>
+            <PropertyRef Name="VrstaProizvodaID" />
+          </Key>
+          <Property Name="VrstaProizvodaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NazivVrsteProizvoda" Type="varchar" MaxLength="56" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__DetaljiAl__Alerg__4BAC3F29">
+          <End Role="Alergija" Type="Self.Alergija" Multiplicity="1" />
+          <End Role="DetaljiAlergija" Type="Self.DetaljiAlergija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alergija">
+              <PropertyRef Name="AlergijaID" />
+            </Principal>
+            <Dependent Role="DetaljiAlergija">
+              <PropertyRef Name="AlergijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetaljiAl__Koris__4AB81AF0">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+          <End Role="DetaljiAlergija" Type="Self.DetaljiAlergija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="KorisnikID" />
+            </Principal>
+            <Dependent Role="DetaljiAlergija">
+              <PropertyRef Name="KorisnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Porudzbin__Koris__34C8D9D1">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+          <End Role="Porudzbina" Type="Self.Porudzbina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="KorisnikID" />
+            </Principal>
+            <Dependent Role="Porudzbina">
+              <PropertyRef Name="KorisnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prodavnic__GradI__2C3393D0">
+          <End Role="Grad" Type="Self.Grad" Multiplicity="0..1" />
+          <End Role="Prodavnica" Type="Self.Prodavnica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grad">
+              <PropertyRef Name="GradID" />
+            </Principal>
+            <Dependent Role="Prodavnica">
+              <PropertyRef Name="GradID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proizvod__BrendI__398D8EEE">
+          <End Role="Brend" Type="Self.Brend" Multiplicity="0..1" />
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brend">
+              <PropertyRef Name="BrendID" />
+            </Principal>
+            <Dependent Role="Proizvod">
+              <PropertyRef Name="BrendID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proizvod__Prodav__3A81B327">
+          <End Role="Prodavnica" Type="Self.Prodavnica" Multiplicity="0..1" />
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prodavnica">
+              <PropertyRef Name="ProdavnicaID" />
+            </Principal>
+            <Dependent Role="Proizvod">
+              <PropertyRef Name="ProdavnicaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proizvod__VrstaP__38996AB5">
+          <End Role="VrstaProizvoda" Type="Self.VrstaProizvoda" Multiplicity="0..1" />
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VrstaProizvoda">
+              <PropertyRef Name="VrstaProizvodaID" />
+            </Principal>
+            <Dependent Role="Proizvod">
+              <PropertyRef Name="VrstaProidvodaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Recenzija__Koris__45F365D3">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="0..1" />
+          <End Role="RecenzijaProizvoda" Type="Self.RecenzijaProizvoda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="KorisnikID" />
+            </Principal>
+            <Dependent Role="RecenzijaProizvoda">
+              <PropertyRef Name="KorisnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Recenzija__Proiz__44FF419A">
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="0..1" />
+          <End Role="RecenzijaProizvoda" Type="Self.RecenzijaProizvoda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvod">
+              <PropertyRef Name="ProizvodID" />
+            </Principal>
+            <Dependent Role="RecenzijaProizvoda">
+              <PropertyRef Name="ProizvodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SlikaProd__Proda__2F10007B">
+          <End Role="Prodavnica" Type="Self.Prodavnica" Multiplicity="0..1" />
+          <End Role="SlikaProdavnice" Type="Self.SlikaProdavnice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prodavnica">
+              <PropertyRef Name="ProdavnicaID" />
+            </Principal>
+            <Dependent Role="SlikaProdavnice">
+              <PropertyRef Name="ProdavnicaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SlikaProi__Proiz__412EB0B6">
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="0..1" />
+          <End Role="SlikaProizvoda" Type="Self.SlikaProizvoda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvod">
+              <PropertyRef Name="ProizvodID" />
+            </Principal>
+            <Dependent Role="SlikaProizvoda">
+              <PropertyRef Name="ProizvodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SlikeBren__Brend__31EC6D26">
+          <End Role="Brend" Type="Self.Brend" Multiplicity="0..1" />
+          <End Role="SlikeBrenda" Type="Self.SlikeBrenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brend">
+              <PropertyRef Name="BrendID" />
+            </Principal>
+            <Dependent Role="SlikeBrenda">
+              <PropertyRef Name="BrendID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaPor__Porud__3E52440B">
+          <End Role="Porudzbina" Type="Self.Porudzbina" Multiplicity="0..1" />
+          <End Role="StavkaPorudzbine" Type="Self.StavkaPorudzbine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Porudzbina">
+              <PropertyRef Name="PorudzbinaID" />
+            </Principal>
+            <Dependent Role="StavkaPorudzbine">
+              <PropertyRef Name="PorudzbinaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaPor__Proiz__3D5E1FD2">
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="0..1" />
+          <End Role="StavkaPorudzbine" Type="Self.StavkaPorudzbine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvod">
+              <PropertyRef Name="ProizvodID" />
+            </Principal>
+            <Dependent Role="StavkaPorudzbine">
+              <PropertyRef Name="ProizvodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Kozmetika2ModelStoreContainer">
+          <EntitySet Name="Alergija" EntityType="Self.Alergija" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Brend" EntityType="Self.Brend" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetaljiAlergija" EntityType="Self.DetaljiAlergija" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grad" EntityType="Self.Grad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Korisnik" EntityType="Self.Korisnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Porudzbina" EntityType="Self.Porudzbina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prodavnica" EntityType="Self.Prodavnica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proizvod" EntityType="Self.Proizvod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecenzijaProizvoda" EntityType="Self.RecenzijaProizvoda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SlikaProdavnice" EntityType="Self.SlikaProdavnice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SlikaProizvoda" EntityType="Self.SlikaProizvoda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SlikeBrenda" EntityType="Self.SlikeBrenda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StavkaPorudzbine" EntityType="Self.StavkaPorudzbine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VrstaProizvoda" EntityType="Self.VrstaProizvoda" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DetaljiAl__Alerg__4BAC3F29" Association="Self.FK__DetaljiAl__Alerg__4BAC3F29">
+            <End Role="Alergija" EntitySet="Alergija" />
+            <End Role="DetaljiAlergija" EntitySet="DetaljiAlergija" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetaljiAl__Koris__4AB81AF0" Association="Self.FK__DetaljiAl__Koris__4AB81AF0">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="DetaljiAlergija" EntitySet="DetaljiAlergija" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Porudzbin__Koris__34C8D9D1" Association="Self.FK__Porudzbin__Koris__34C8D9D1">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="Porudzbina" EntitySet="Porudzbina" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prodavnic__GradI__2C3393D0" Association="Self.FK__Prodavnic__GradI__2C3393D0">
+            <End Role="Grad" EntitySet="Grad" />
+            <End Role="Prodavnica" EntitySet="Prodavnica" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proizvod__BrendI__398D8EEE" Association="Self.FK__Proizvod__BrendI__398D8EEE">
+            <End Role="Brend" EntitySet="Brend" />
+            <End Role="Proizvod" EntitySet="Proizvod" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proizvod__Prodav__3A81B327" Association="Self.FK__Proizvod__Prodav__3A81B327">
+            <End Role="Prodavnica" EntitySet="Prodavnica" />
+            <End Role="Proizvod" EntitySet="Proizvod" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proizvod__VrstaP__38996AB5" Association="Self.FK__Proizvod__VrstaP__38996AB5">
+            <End Role="VrstaProizvoda" EntitySet="VrstaProizvoda" />
+            <End Role="Proizvod" EntitySet="Proizvod" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Recenzija__Koris__45F365D3" Association="Self.FK__Recenzija__Koris__45F365D3">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="RecenzijaProizvoda" EntitySet="RecenzijaProizvoda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Recenzija__Proiz__44FF419A" Association="Self.FK__Recenzija__Proiz__44FF419A">
+            <End Role="Proizvod" EntitySet="Proizvod" />
+            <End Role="RecenzijaProizvoda" EntitySet="RecenzijaProizvoda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SlikaProd__Proda__2F10007B" Association="Self.FK__SlikaProd__Proda__2F10007B">
+            <End Role="Prodavnica" EntitySet="Prodavnica" />
+            <End Role="SlikaProdavnice" EntitySet="SlikaProdavnice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SlikaProi__Proiz__412EB0B6" Association="Self.FK__SlikaProi__Proiz__412EB0B6">
+            <End Role="Proizvod" EntitySet="Proizvod" />
+            <End Role="SlikaProizvoda" EntitySet="SlikaProizvoda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SlikeBren__Brend__31EC6D26" Association="Self.FK__SlikeBren__Brend__31EC6D26">
+            <End Role="Brend" EntitySet="Brend" />
+            <End Role="SlikeBrenda" EntitySet="SlikeBrenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaPor__Porud__3E52440B" Association="Self.FK__StavkaPor__Porud__3E52440B">
+            <End Role="Porudzbina" EntitySet="Porudzbina" />
+            <End Role="StavkaPorudzbine" EntitySet="StavkaPorudzbine" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaPor__Proiz__3D5E1FD2" Association="Self.FK__StavkaPor__Proiz__3D5E1FD2">
+            <End Role="Proizvod" EntitySet="Proizvod" />
+            <End Role="StavkaPorudzbine" EntitySet="StavkaPorudzbine" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Kozmetika2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Alergija">
+          <Key>
+            <PropertyRef Name="AlergijaID" />
+          </Key>
+          <Property Name="AlergijaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NazivAlergije" Type="String" MaxLength="51" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Brend">
+          <Key>
+            <PropertyRef Name="BrendID" />
+          </Key>
+          <Property Name="BrendID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NazivBrenda" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetaljiAlergija">
+          <Key>
+            <PropertyRef Name="DetaljiAlergijaID" />
+          </Key>
+          <Property Name="DetaljiAlergijaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KorisnikID" Type="Int32" Nullable="false" />
+          <Property Name="AlergijaID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grad">
+          <Key>
+            <PropertyRef Name="GradID" />
+          </Key>
+          <Property Name="GradID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NazivGrada" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PostanskiBroj" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Korisnik">
+          <Key>
+            <PropertyRef Name="KorisnikID" />
+          </Key>
+          <Property Name="KorisnikID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipKorisnika" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ime" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prezime" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Kontakt" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adresa" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BrojStana" Type="Int32" />
+          <Property Name="UkupnoStanjeBodova" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Porudzbina">
+          <Key>
+            <PropertyRef Name="PorudzbinaID" />
+          </Key>
+          <Property Name="PorudzbinaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CenaPorudzbine" Type="Int32" Nullable="false" />
+          <Property Name="Datum" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Isplata" Type="Boolean" Nullable="false" />
+          <Property Name="Zahtev" Type="Boolean" Nullable="false" />
+          <Property Name="Komentar" Type="String" MaxLength="199" FixedLength="false" Unicode="false" />
+          <Property Name="NacinPlacanja" Type="String" MaxLength="51" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="KorisnikID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Prodavnica">
+          <Key>
+            <PropertyRef Name="ProdavnicaID" />
+          </Key>
+          <Property Name="ProdavnicaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NazivProdavnice" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Kontakt" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Opis" Type="String" MaxLength="1999" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adresa" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RadnoVreme" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GradID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Proizvod">
+          <Key>
+            <PropertyRef Name="ProizvodID" />
+          </Key>
+          <Property Name="ProizvodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NazivProizvoda" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cena" Type="Int32" Nullable="false" />
+          <Property Name="Opis" Type="String" MaxLength="1199" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OcenaProizvoda" Type="Int32" Nullable="false" />
+          <Property Name="VrstaProidvodaID" Type="Int32" />
+          <Property Name="BrendID" Type="Int32" />
+          <Property Name="ProdavnicaID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="RecenzijaProizvoda">
+          <Key>
+            <PropertyRef Name="RecenzijaProizvodaID" />
+          </Key>
+          <Property Name="RecenzijaProizvodaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ocena" Type="Int32" Nullable="false" />
+          <Property Name="Komentar" Type="String" MaxLength="1199" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Datum" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Odobrena" Type="Boolean" />
+          <Property Name="ProizvodID" Type="Int32" />
+          <Property Name="KorisnikID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SlikaProdavnice">
+          <Key>
+            <PropertyRef Name="SlikaProdavniceID" />
+          </Key>
+          <Property Name="SlikaProdavniceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Putanja" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProdavnicaID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SlikaProizvoda">
+          <Key>
+            <PropertyRef Name="SlikaID" />
+          </Key>
+          <Property Name="SlikaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Putanja" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProizvodID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SlikeBrenda">
+          <Key>
+            <PropertyRef Name="SlikeBrendaID" />
+          </Key>
+          <Property Name="SlikeBrendaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Putanja" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BrendID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="StavkaPorudzbine">
+          <Key>
+            <PropertyRef Name="StavkaPorudzbineID" />
+          </Key>
+          <Property Name="StavkaPorudzbineID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KolicinaProizvoda" Type="Int32" Nullable="false" />
+          <Property Name="ProizvodID" Type="Int32" />
+          <Property Name="PorudzbinaID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="VrstaProizvoda">
+          <Key>
+            <PropertyRef Name="VrstaProizvodaID" />
+          </Key>
+          <Property Name="VrstaProizvodaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NazivVrsteProizvoda" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__DetaljiAl__Alerg__4BAC3F29">
+          <End Role="Alergija" Type="Self.Alergija" Multiplicity="1" />
+          <End Role="DetaljiAlergija" Type="Self.DetaljiAlergija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alergija">
+              <PropertyRef Name="AlergijaID" />
+            </Principal>
+            <Dependent Role="DetaljiAlergija">
+              <PropertyRef Name="AlergijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proizvod__BrendI__398D8EEE">
+          <End Role="Brend" Type="Self.Brend" Multiplicity="0..1" />
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brend">
+              <PropertyRef Name="BrendID" />
+            </Principal>
+            <Dependent Role="Proizvod">
+              <PropertyRef Name="BrendID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SlikeBren__Brend__31EC6D26">
+          <End Role="Brend" Type="Self.Brend" Multiplicity="0..1" />
+          <End Role="SlikeBrenda" Type="Self.SlikeBrenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brend">
+              <PropertyRef Name="BrendID" />
+            </Principal>
+            <Dependent Role="SlikeBrenda">
+              <PropertyRef Name="BrendID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetaljiAl__Koris__4AB81AF0">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+          <End Role="DetaljiAlergija" Type="Self.DetaljiAlergija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="KorisnikID" />
+            </Principal>
+            <Dependent Role="DetaljiAlergija">
+              <PropertyRef Name="KorisnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prodavnic__GradI__2C3393D0">
+          <End Role="Grad" Type="Self.Grad" Multiplicity="0..1" />
+          <End Role="Prodavnica" Type="Self.Prodavnica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grad">
+              <PropertyRef Name="GradID" />
+            </Principal>
+            <Dependent Role="Prodavnica">
+              <PropertyRef Name="GradID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Porudzbin__Koris__34C8D9D1">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+          <End Role="Porudzbina" Type="Self.Porudzbina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="KorisnikID" />
+            </Principal>
+            <Dependent Role="Porudzbina">
+              <PropertyRef Name="KorisnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Recenzija__Koris__45F365D3">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="0..1" />
+          <End Role="RecenzijaProizvoda" Type="Self.RecenzijaProizvoda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="KorisnikID" />
+            </Principal>
+            <Dependent Role="RecenzijaProizvoda">
+              <PropertyRef Name="KorisnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaPor__Porud__3E52440B">
+          <End Role="Porudzbina" Type="Self.Porudzbina" Multiplicity="0..1" />
+          <End Role="StavkaPorudzbine" Type="Self.StavkaPorudzbine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Porudzbina">
+              <PropertyRef Name="PorudzbinaID" />
+            </Principal>
+            <Dependent Role="StavkaPorudzbine">
+              <PropertyRef Name="PorudzbinaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proizvod__Prodav__3A81B327">
+          <End Role="Prodavnica" Type="Self.Prodavnica" Multiplicity="0..1" />
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prodavnica">
+              <PropertyRef Name="ProdavnicaID" />
+            </Principal>
+            <Dependent Role="Proizvod">
+              <PropertyRef Name="ProdavnicaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SlikaProd__Proda__2F10007B">
+          <End Role="Prodavnica" Type="Self.Prodavnica" Multiplicity="0..1" />
+          <End Role="SlikaProdavnice" Type="Self.SlikaProdavnice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prodavnica">
+              <PropertyRef Name="ProdavnicaID" />
+            </Principal>
+            <Dependent Role="SlikaProdavnice">
+              <PropertyRef Name="ProdavnicaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proizvod__VrstaP__38996AB5">
+          <End Role="VrstaProizvoda" Type="Self.VrstaProizvoda" Multiplicity="0..1" />
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VrstaProizvoda">
+              <PropertyRef Name="VrstaProizvodaID" />
+            </Principal>
+            <Dependent Role="Proizvod">
+              <PropertyRef Name="VrstaProidvodaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Recenzija__Proiz__44FF419A">
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="0..1" />
+          <End Role="RecenzijaProizvoda" Type="Self.RecenzijaProizvoda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvod">
+              <PropertyRef Name="ProizvodID" />
+            </Principal>
+            <Dependent Role="RecenzijaProizvoda">
+              <PropertyRef Name="ProizvodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SlikaProi__Proiz__412EB0B6">
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="0..1" />
+          <End Role="SlikaProizvoda" Type="Self.SlikaProizvoda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvod">
+              <PropertyRef Name="ProizvodID" />
+            </Principal>
+            <Dependent Role="SlikaProizvoda">
+              <PropertyRef Name="ProizvodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaPor__Proiz__3D5E1FD2">
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="0..1" />
+          <End Role="StavkaPorudzbine" Type="Self.StavkaPorudzbine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvod">
+              <PropertyRef Name="ProizvodID" />
+            </Principal>
+            <Dependent Role="StavkaPorudzbine">
+              <PropertyRef Name="ProizvodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alergijas" EntityType="Self.Alergija" />
+          <EntitySet Name="Brends" EntityType="Self.Brend" />
+          <EntitySet Name="DetaljiAlergijas" EntityType="Self.DetaljiAlergija" />
+          <EntitySet Name="Grads" EntityType="Self.Grad" />
+          <EntitySet Name="Korisniks" EntityType="Self.Korisnik" />
+          <EntitySet Name="Porudzbinas" EntityType="Self.Porudzbina" />
+          <EntitySet Name="Prodavnicas" EntityType="Self.Prodavnica" />
+          <EntitySet Name="Proizvods" EntityType="Self.Proizvod" />
+          <EntitySet Name="RecenzijaProizvodas" EntityType="Self.RecenzijaProizvoda" />
+          <EntitySet Name="SlikaProdavnices" EntityType="Self.SlikaProdavnice" />
+          <EntitySet Name="SlikaProizvodas" EntityType="Self.SlikaProizvoda" />
+          <EntitySet Name="SlikeBrendas" EntityType="Self.SlikeBrenda" />
+          <EntitySet Name="StavkaPorudzbines" EntityType="Self.StavkaPorudzbine" />
+          <EntitySet Name="VrstaProizvodas" EntityType="Self.VrstaProizvoda" />
+          <AssociationSet Name="FK__DetaljiAl__Alerg__4BAC3F29" Association="Self.FK__DetaljiAl__Alerg__4BAC3F29">
+            <End Role="Alergija" EntitySet="Alergijas" />
+            <End Role="DetaljiAlergija" EntitySet="DetaljiAlergijas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proizvod__BrendI__398D8EEE" Association="Self.FK__Proizvod__BrendI__398D8EEE">
+            <End Role="Brend" EntitySet="Brends" />
+            <End Role="Proizvod" EntitySet="Proizvods" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SlikeBren__Brend__31EC6D26" Association="Self.FK__SlikeBren__Brend__31EC6D26">
+            <End Role="Brend" EntitySet="Brends" />
+            <End Role="SlikeBrenda" EntitySet="SlikeBrendas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetaljiAl__Koris__4AB81AF0" Association="Self.FK__DetaljiAl__Koris__4AB81AF0">
+            <End Role="Korisnik" EntitySet="Korisniks" />
+            <End Role="DetaljiAlergija" EntitySet="DetaljiAlergijas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prodavnic__GradI__2C3393D0" Association="Self.FK__Prodavnic__GradI__2C3393D0">
+            <End Role="Grad" EntitySet="Grads" />
+            <End Role="Prodavnica" EntitySet="Prodavnicas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Porudzbin__Koris__34C8D9D1" Association="Self.FK__Porudzbin__Koris__34C8D9D1">
+            <End Role="Korisnik" EntitySet="Korisniks" />
+            <End Role="Porudzbina" EntitySet="Porudzbinas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Recenzija__Koris__45F365D3" Association="Self.FK__Recenzija__Koris__45F365D3">
+            <End Role="Korisnik" EntitySet="Korisniks" />
+            <End Role="RecenzijaProizvoda" EntitySet="RecenzijaProizvodas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaPor__Porud__3E52440B" Association="Self.FK__StavkaPor__Porud__3E52440B">
+            <End Role="Porudzbina" EntitySet="Porudzbinas" />
+            <End Role="StavkaPorudzbine" EntitySet="StavkaPorudzbines" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proizvod__Prodav__3A81B327" Association="Self.FK__Proizvod__Prodav__3A81B327">
+            <End Role="Prodavnica" EntitySet="Prodavnicas" />
+            <End Role="Proizvod" EntitySet="Proizvods" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SlikaProd__Proda__2F10007B" Association="Self.FK__SlikaProd__Proda__2F10007B">
+            <End Role="Prodavnica" EntitySet="Prodavnicas" />
+            <End Role="SlikaProdavnice" EntitySet="SlikaProdavnices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proizvod__VrstaP__38996AB5" Association="Self.FK__Proizvod__VrstaP__38996AB5">
+            <End Role="VrstaProizvoda" EntitySet="VrstaProizvodas" />
+            <End Role="Proizvod" EntitySet="Proizvods" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Recenzija__Proiz__44FF419A" Association="Self.FK__Recenzija__Proiz__44FF419A">
+            <End Role="Proizvod" EntitySet="Proizvods" />
+            <End Role="RecenzijaProizvoda" EntitySet="RecenzijaProizvodas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SlikaProi__Proiz__412EB0B6" Association="Self.FK__SlikaProi__Proiz__412EB0B6">
+            <End Role="Proizvod" EntitySet="Proizvods" />
+            <End Role="SlikaProizvoda" EntitySet="SlikaProizvodas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaPor__Proiz__3D5E1FD2" Association="Self.FK__StavkaPor__Proiz__3D5E1FD2">
+            <End Role="Proizvod" EntitySet="Proizvods" />
+            <End Role="StavkaPorudzbine" EntitySet="StavkaPorudzbines" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Kozmetika2ModelStoreContainer" CdmEntityContainer="DBModel">
+          <EntitySetMapping Name="Alergijas">
+            <EntityTypeMapping TypeName="Kozmetika2Model.Alergija">
+              <MappingFragment StoreEntitySet="Alergija">
+                <ScalarProperty Name="AlergijaID" ColumnName="AlergijaID" />
+                <ScalarProperty Name="NazivAlergije" ColumnName="NazivAlergije" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Brends">
+            <EntityTypeMapping TypeName="Kozmetika2Model.Brend">
+              <MappingFragment StoreEntitySet="Brend">
+                <ScalarProperty Name="BrendID" ColumnName="BrendID" />
+                <ScalarProperty Name="NazivBrenda" ColumnName="NazivBrenda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetaljiAlergijas">
+            <EntityTypeMapping TypeName="Kozmetika2Model.DetaljiAlergija">
+              <MappingFragment StoreEntitySet="DetaljiAlergija">
+                <ScalarProperty Name="DetaljiAlergijaID" ColumnName="DetaljiAlergijaID" />
+                <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+                <ScalarProperty Name="AlergijaID" ColumnName="AlergijaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grads">
+            <EntityTypeMapping TypeName="Kozmetika2Model.Grad">
+              <MappingFragment StoreEntitySet="Grad">
+                <ScalarProperty Name="GradID" ColumnName="GradID" />
+                <ScalarProperty Name="NazivGrada" ColumnName="NazivGrada" />
+                <ScalarProperty Name="PostanskiBroj" ColumnName="PostanskiBroj" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Korisniks">
+            <EntityTypeMapping TypeName="Kozmetika2Model.Korisnik">
+              <MappingFragment StoreEntitySet="Korisnik">
+                <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+                <ScalarProperty Name="TipKorisnika" ColumnName="TipKorisnika" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Kontakt" ColumnName="Kontakt" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="BrojStana" ColumnName="BrojStana" />
+                <ScalarProperty Name="UkupnoStanjeBodova" ColumnName="UkupnoStanjeBodova" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Porudzbinas">
+            <EntityTypeMapping TypeName="Kozmetika2Model.Porudzbina">
+              <MappingFragment StoreEntitySet="Porudzbina">
+                <ScalarProperty Name="PorudzbinaID" ColumnName="PorudzbinaID" />
+                <ScalarProperty Name="CenaPorudzbine" ColumnName="CenaPorudzbine" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Isplata" ColumnName="Isplata" />
+                <ScalarProperty Name="Zahtev" ColumnName="Zahtev" />
+                <ScalarProperty Name="Komentar" ColumnName="Komentar" />
+                <ScalarProperty Name="NacinPlacanja" ColumnName="NacinPlacanja" />
+                <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prodavnicas">
+            <EntityTypeMapping TypeName="Kozmetika2Model.Prodavnica">
+              <MappingFragment StoreEntitySet="Prodavnica">
+                <ScalarProperty Name="ProdavnicaID" ColumnName="ProdavnicaID" />
+                <ScalarProperty Name="NazivProdavnice" ColumnName="NazivProdavnice" />
+                <ScalarProperty Name="Kontakt" ColumnName="Kontakt" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="RadnoVreme" ColumnName="RadnoVreme" />
+                <ScalarProperty Name="GradID" ColumnName="GradID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proizvods">
+            <EntityTypeMapping TypeName="Kozmetika2Model.Proizvod">
+              <MappingFragment StoreEntitySet="Proizvod">
+                <ScalarProperty Name="ProizvodID" ColumnName="ProizvodID" />
+                <ScalarProperty Name="NazivProizvoda" ColumnName="NazivProizvoda" />
+                <ScalarProperty Name="Cena" ColumnName="Cena" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="OcenaProizvoda" ColumnName="OcenaProizvoda" />
+                <ScalarProperty Name="VrstaProidvodaID" ColumnName="VrstaProidvodaID" />
+                <ScalarProperty Name="BrendID" ColumnName="BrendID" />
+                <ScalarProperty Name="ProdavnicaID" ColumnName="ProdavnicaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecenzijaProizvodas">
+            <EntityTypeMapping TypeName="Kozmetika2Model.RecenzijaProizvoda">
+              <MappingFragment StoreEntitySet="RecenzijaProizvoda">
+                <ScalarProperty Name="RecenzijaProizvodaID" ColumnName="RecenzijaProizvodaID" />
+                <ScalarProperty Name="Ocena" ColumnName="Ocena" />
+                <ScalarProperty Name="Komentar" ColumnName="Komentar" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Odobrena" ColumnName="Odobrena" />
+                <ScalarProperty Name="ProizvodID" ColumnName="ProizvodID" />
+                <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SlikaProdavnices">
+            <EntityTypeMapping TypeName="Kozmetika2Model.SlikaProdavnice">
+              <MappingFragment StoreEntitySet="SlikaProdavnice">
+                <ScalarProperty Name="SlikaProdavniceID" ColumnName="SlikaProdavniceID" />
+                <ScalarProperty Name="Putanja" ColumnName="Putanja" />
+                <ScalarProperty Name="ProdavnicaID" ColumnName="ProdavnicaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SlikaProizvodas">
+            <EntityTypeMapping TypeName="Kozmetika2Model.SlikaProizvoda">
+              <MappingFragment StoreEntitySet="SlikaProizvoda">
+                <ScalarProperty Name="SlikaID" ColumnName="SlikaID" />
+                <ScalarProperty Name="Putanja" ColumnName="Putanja" />
+                <ScalarProperty Name="ProizvodID" ColumnName="ProizvodID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SlikeBrendas">
+            <EntityTypeMapping TypeName="Kozmetika2Model.SlikeBrenda">
+              <MappingFragment StoreEntitySet="SlikeBrenda">
+                <ScalarProperty Name="SlikeBrendaID" ColumnName="SlikeBrendaID" />
+                <ScalarProperty Name="Putanja" ColumnName="Putanja" />
+                <ScalarProperty Name="BrendID" ColumnName="BrendID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StavkaPorudzbines">
+            <EntityTypeMapping TypeName="Kozmetika2Model.StavkaPorudzbine">
+              <MappingFragment StoreEntitySet="StavkaPorudzbine">
+                <ScalarProperty Name="StavkaPorudzbineID" ColumnName="StavkaPorudzbineID" />
+                <ScalarProperty Name="KolicinaProizvoda" ColumnName="KolicinaProizvoda" />
+                <ScalarProperty Name="ProizvodID" ColumnName="ProizvodID" />
+                <ScalarProperty Name="PorudzbinaID" ColumnName="PorudzbinaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VrstaProizvodas">
+            <EntityTypeMapping TypeName="Kozmetika2Model.VrstaProizvoda">
+              <MappingFragment StoreEntitySet="VrstaProizvoda">
+                <ScalarProperty Name="VrstaProizvodaID" ColumnName="VrstaProizvodaID" />
+                <ScalarProperty Name="NazivVrsteProizvoda" ColumnName="NazivVrsteProizvoda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
