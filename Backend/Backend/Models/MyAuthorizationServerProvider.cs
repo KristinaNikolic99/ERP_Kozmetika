@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin.Security.OAuth;
+﻿using Backend.Controllers;
+using Microsoft.Owin.Security.OAuth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,9 @@ namespace Backend.Models
         {
             using (UserMasterRepository _repo = new UserMasterRepository())
             {
-                var user = _repo.ValidateUser(context.UserName, context.Password);
+                KorisnikController korisnikController = new KorisnikController();
+                string encryptPassword = korisnikController.EncryptPassword(context.Password);
+                var user = _repo.ValidateUser(context.UserName, encryptPassword);
                 if (user == null)
                 {
                     context.SetError("invalid_grant", "Provided username and password is incorrect");

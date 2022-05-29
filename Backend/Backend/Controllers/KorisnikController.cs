@@ -7,6 +7,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Backend.Models;
@@ -61,9 +63,10 @@ namespace Backend.Controllers
         public IHttpActionResult GetKorisnikUP(string username, string password)
         {
             Korisnik korisnik = new Korisnik();
+            string encryptPassword = this.EncryptPassword(password);
             foreach (var k in db.Korisniks)
             {
-                if (k.Username == username && k.Password == password)
+                if (k.Username == username && k.Password == encryptPassword)
                 {
                     korisnik = k;
                 }
@@ -239,6 +242,7 @@ namespace Backend.Controllers
         {
             try
             {
+                korisnik.Password = this.EncryptPassword(korisnik.Password);
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
@@ -302,6 +306,24 @@ namespace Backend.Controllers
         private bool KorisnikExists(int id)
         {
             return db.Korisniks.Count(e => e.KorisnikID == id) > 0;
+        }
+
+        public string EncryptPassword(string password)
+        {
+            string encryptPassword;
+            string hash = "kika";
+            byte[] data = UTF8Encoding.UTF8.GetBytes(password);
+            using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
+            {
+                byte[] keys = md5.ComputeHash(UTF32Encoding.UTF8.GetBytes(hash));
+                using (TripleDESCryptoServiceProvider tripDes = new TripleDESCryptoServiceProvider() { Key = keys, Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 })
+                {
+                    ICryptoTransform transform = tripDes.CreateEncryptor();
+                    byte[] results = transform.TransformFinalBlock(data, 0, data.Length);
+                    encryptPassword = Convert.ToBase64String(results, 0, results.Length);
+                }
+            }
+            return encryptPassword;
         }
     }
 }
