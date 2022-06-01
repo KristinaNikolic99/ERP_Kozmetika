@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+
+.carousel-indicators li {
+    position: relative;
+    top: 29px;
+    height: 7px;
+    width: 7px;
+    background-color: grey;
+}
+
+.carousel-indicators .active {
+    position: relative;
+    top: 29px;
+    height: 9px;
+    width: 9px;
+    background-color: grey;
+}

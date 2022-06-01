@@ -1,0 +1,30 @@
+<div class="container">
+    <h1 mat-dialog-title class="title">Dodaj novu sliku prodavnice:</h1>
+  
+    <form class="mat-dialog-content" #form="ngForm">
+  
+      <div class="form mat-elevation-z8 col-lg-6">
+        <label>Izaberite sliku prodavnice:</label>
+        <input type="file" #Putanja ngModel name="Putanja" accept="image/png, image/jpg" style="margin-left: 19px;">
+      </div>
+  
+      <div class="form mat-elevation-z8 col-lg-12">
+        <mat-form-field>
+          <mat-label>ProdavnicaID</mat-label>
+          <mat-select #Prodavnica ngModel name="ProdavnicaID">
+            <mat-option type="number" *ngFor="let p of prodavnica" [value]="p.ProdavnicaID">{{p.ProdavnicaID}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  
+      <div mat-dialog-actions class="col-lg-12">
+        <div class="col-lg-6">
+          <button mat-raised-button color="primary" (click)="add(form)">Dodaj sliku prodavnice</button>
+        </div>
+        <div class="col-lg-6">
+          <button mat-raised-button color="warn" (click)="cancle()">Poništi</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  

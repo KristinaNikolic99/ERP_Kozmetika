@@ -1,0 +1,103 @@
+<mat-toolbar class="example-toolbar mat-elevation-z8 sticky-top">
+    <span>
+        <a href="home"><img src="/assets/Images/icon.jpg" class="example-img"></a>
+        Online kozmetika!
+    </span>
+    <div class="flex"></div>
+    <button mat-stroked-button style="margin-right: 9px;" *ngIf="korisnik.TipKorisnika == 'Kupac'" (click)="porudzbina()">
+        Porudzbine
+    </button>
+    <button mat-stroked-button [matMenuTriggerFor]="menu" class="menu" *ngIf="korisnik.TipKorisnika == 'Administrator'">
+        Svi podaci
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item style="border-bottom: 4px solid magenta;" (click)="korisnici()">Korisnici</button>
+        <button mat-menu-item style="border-bottom: 4px solid magenta;" (click)="vrstaProizvoda()">Vrste proizvoda</button>
+        <button mat-menu-item style="border-bottom: 4px solid magenta" (click)="porudzbina()">Porudzbine</button>
+    </mat-menu>
+    <p class="example-p">{{korisnik.Username}}</p>
+    <button mat-raised-button color="warn" *ngIf="korisnik.TipKorisnika == 'Kupac' || korisnik.TipKorisnika == 'Administrator'"
+     (click)="Logout()">Log out</button>
+     <button mat-raised-button color="warn" *ngIf="korisnik.TipKorisnika == 'Gost'"
+     (click)="Login()">Log in</button>
+</mat-toolbar>
+
+<div class="example-div">
+    <div class="text-center naslov">Najkvalitetniji kozmetički proizvodi na jednom mestu</div>
+    <div class="container">
+        <h1 class="text-center naslov1">Pronađite prodavnicu u željenom gradu</h1>
+        <div class="container" style="margin-top: 89px;">
+            <div class="col-lg-4 text-center" *ngFor="let g of grad">
+                <button mat-raised-button class="button1 mat-elevation-z8" (click)="prodavnica(g.GradID)">
+                    <h1>{{g.NazivGrada}}</h1>
+                </button>
+                <p class="paragraf1" *ngIf="g.NazivGrada == 'Novi Sad'">
+                    Širok izbor radnji sa kozmetičkim proizvodima.
+                    Za ljubitelje dobre kozmetike u Novom Sadu se nalaze radnje kao što su Sephora, Alexandar Cosmetics, Lilly, 
+                    Dm, Jasmin parfimerije i mnoge druge.
+                </p>
+                <p class="paragraf1" *ngIf="g.NazivGrada == 'Beograd'">
+                    U glavnom gradu Srbije možete pronaći najbolje i najpristupačnije evropske proizvode.
+                    Radnje kao što su Dm, Sephora, Jasmin parfimerije, Alexandar Cosmetics i Lilly omogućavaju vam
+                    prijatnu i ugodnu kupovinu.
+                </p>
+                
+                <p class="paragraf1" *ngIf="g.NazivGrada == 'Niš'">
+                    Pronađite kompletan asortiman proizvoda vodećih svetskih brendova.
+                    Posetite naše prodavnice i kupujte u skladu sa trendovima.
+                    Prodavnice Dm, Sephora, Jasmin parfimerije, Alexandar Cosmetics i Lilly omogućavaju vam
+                    prijatnu i ugodnu kupovinu.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="div1">
+    <div class="container example-container">
+        <div class="col-sm-5" style="margin-bottom: 119px;">
+            <h1 class="text-center">SVETSKI BRENDOVI</h1>
+            <hr style="border: 2px solid blueviolet;">
+            <div>
+                <img src="/assets/Images/Loreal.png">
+                <img src="/assets/Images/maybelline.jpg" style="margin-left: 5px;">
+                <img src="/assets/Images/YSL.jpg" style="margin-left: 5px;">
+                <div style="margin-top: 19px;"></div>
+                <img src="/assets/Images/GlamGlow.jpg">
+                <img src="/assets/Images/Benefit.jpg" style="margin-left: 5px;">
+                <img src="/assets/Images/Dior.png" style="margin-left: 5px;">
+            </div>
+        </div>
+        <div class="col-sm-5" style="margin-bottom: 119px;">
+            <h1 class="text-center">ASORTIMAN</h1>
+            <hr style="border: 2px solid blueviolet;">
+            <div>
+                <img src="/assets/Images/NegaLica.jpg">
+                <img src="/assets/Images/NegaTela.jpg" style="margin-left: 5px;">
+                <img src="/assets/Images/Sminka.jpg" style="margin-left: 5px;">
+                <div style="margin-top: 19px;"></div>
+                <img src="/assets/Images/Parfemi.jpg">
+                <img src="/assets/Images/NegaKose.jpg" style="margin-left: 5px;">
+                <img src="/assets/Images/NegaNoktiju.jpg" style="margin-left: 5px;">
+            </div>
+            <div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="example-footer">
+    <div class="text-center">
+      © 2022 Copyright:
+      <a href="#"> Kozmetika.com</a>
+    </div>
+</footer>
+
+<ngx-spinner
+    bdColor = "rgba(0, 0, 0, 0.8)"
+    size = "medium" 
+    color = "#fff"
+    type = "ball-fussion"
+    >
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>

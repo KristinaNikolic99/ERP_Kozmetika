@@ -1,0 +1,58 @@
+<div class="container">
+    <h1 mat-dialog-title *ngIf="flag == 1" class="title">Dodaj novu porudzbinu:</h1>
+    <h1 mat-dialog-title *ngIf="flag == 2" class="title">Modifikuj porudzbinu: {{data.PorudzbinaID}}</h1>
+    <h1 mat-dialog-title *ngIf="flag == 3" class="title">Obriši porudzbinu: {{data.PorudzbinaID}}</h1>
+
+    <form class="mat-dialog-content" #form="ngForm">
+        <div class="form mat-elevation-z8 col-lg-12" *ngIf="flag != 1">
+            <mat-form-field>
+                <input matInput type="text" [(ngModel)]="data.Datum" name="Datum" placeholder="Datum" 
+                [disabled]="flag == 3">
+            </mat-form-field>
+        </div>
+        <div class="form mat-elevation-z8 col-lg-6">
+            <mat-form-field>
+                <input matInput type="number" [(ngModel)]="data.CenaPorudzbine" name="CenaPorudzbine" placeholder="CenaPorudzbine" 
+                [disabled]="flag == 3" required>
+            </mat-form-field>
+        </div>
+        <div class="form mat-elevation-z8 col-lg-6">
+            <mat-checkbox [(ngModel)]="data.Isplata" name="Isplata" [disabled]="flag == 3">Isplata</mat-checkbox>
+        </div>
+        <div class="form mat-elevation-z8 col-lg-12">
+            <mat-checkbox [(ngModel)]="data.Zahtev" name="Zahtev" [disabled]="flag == 3">Zahtev</mat-checkbox>
+        </div>
+        <div class="form mat-elevation-z8 col-lg-12">
+            <mat-form-field>
+                <textarea matInput type="text" [(ngModel)]="data.Komentar" name="Komentar" [disabled]="flag == 3" 
+                 placeholder="Komentar" required></textarea>
+            </mat-form-field>
+        </div>
+        <div class="form mat-elevation-z8 col-lg-6">
+            <mat-form-field>
+                <mat-label>KorisnikID</mat-label>
+                <mat-select [(ngModel)]="data.KorisnikID" name="KorisnikID" [disabled]="flag == 3">
+                    <mat-option type="number" *ngFor="let k of korisnik" [value]="k.KorisnikID">{{k.KorisnikID}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div mat-dialog-actions class="col-lg-12">
+            <div class="col-lg-6">
+                <button mat-raised-button color="primary" *ngIf="flag == 1" [disabled]="!form.valid" (click)="add()">
+                    Dodaj porudzbinu
+                </button>
+                <button mat-raised-button color="primary" *ngIf="flag == 2" [disabled]="!form.valid" (click)="update()">
+                    Modifikuj porudzbinu
+                </button>
+                <button mat-raised-button color="primary" *ngIf="flag == 3" (click)="delete()">
+                    Obriši porudzbinu
+                </button>
+            </div>
+            <div class="col-lg-6">
+                <button mat-raised-button color="warn" (click)="cancle()">Poništi</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+

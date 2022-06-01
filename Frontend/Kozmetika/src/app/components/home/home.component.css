@@ -1,0 +1,117 @@
+.example-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    height: 49px;
+}
+
+.example-img {
+    height: 49px;
+    width: 59px;
+    margin-left: 39px;
+}
+
+span {
+    font-size: 24px;
+    font-family: cursive;
+    color: red;
+}
+
+.flex {
+    flex: 1 1 auto;
+}
+
+.example-p {
+    font-size: 24px;
+    font-family: cursive;
+    margin-top: 4px;
+    margin-right: 19px;
+    color: silver;
+}
+
+.example-div {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: url("/assets/Images/background1.jpg") no-repeat;
+    background-size: cover;
+    height: auto;
+    width: 100%;
+}
+
+.example-div .naslov {
+    clear: both;
+    position: relative;
+    top: 59px;
+    color: white;
+    font-family: cursive;
+    font-size: 39px;
+}
+
+.naslov1 {
+    clear: both;
+    position: relative;
+    top: 59px;
+    font-family: cursive;
+    font-size: 29px;
+    color: white;
+}
+
+.button1 {
+    background: rgb(255, 255, 255, 0.1);
+    height: 44px;
+    width: 199px;
+    margin-left: 19px;
+    font-family: cursive;
+    font-size: 29px;
+    color: white;
+}
+
+.paragraf1 {
+    margin-top: 19px;
+    color: white;
+    font-size: 16px;
+    font-style: oblique;
+}
+
+.menu {
+    margin-right: 9px;
+}
+
+.div1 {
+    clear: both;
+    position: relative;
+    height: auto;
+    width: 100%;
+    background-color: rgb(79, 79, 79, 0.2);
+    min-height: 400px;
+}
+
+.example-container {
+    position: relative;
+    top: 59px;
+    left: 99px;
+}
+
+.div1 img {
+    height: 129px;
+    width: 139px;
+}
+
+.example-footer {
+    position: relative;
+    bottom: 0;
+    height: 119px;
+    width: 100%;
+    background: black;
+    color: white;
+}
+
+.example-footer .text-center {
+    position: relative;
+    top: 39px;
+    font-size: 26px;
+}
+

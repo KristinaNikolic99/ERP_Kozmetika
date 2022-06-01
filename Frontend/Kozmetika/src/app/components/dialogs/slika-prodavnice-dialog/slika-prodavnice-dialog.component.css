@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    min-width: 419px;
+  }
+  
+  .form {
+    display: flex;
+    padding-top: 4px;
+    height: auto;
+    width: 100%
+  }
+  
+  .mat-form-field {
+    font-size: 16px;
+    flex-grow: 1;
+  }
+  
+  mat-checkbox {
+    height: 46px;
+    margin-top: 19.5px;
+    color: blue;
+    flex-grow: 1;
+  }
+  
+  .title {
+    color: blue;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-bottom: 4px solid blue;
+  }
+  
+  button {
+    width: 100%;
+  }
+  

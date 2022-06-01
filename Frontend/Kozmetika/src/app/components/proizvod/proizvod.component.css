@@ -1,0 +1,101 @@
+.example-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    height: 49px;
+}
+
+.example-img {
+    height: 49px;
+    width: 59px;
+    margin-left: 39px;
+}
+
+span {
+    font-size: 24px;
+    font-family: cursive;
+    color: red;
+}
+
+.flex {
+    flex: 1 1 auto;
+}
+
+.example-p {
+    font-size: 24px;
+    font-family: cursive;
+    margin-top: 4px;
+    margin-right: 19px;
+    color: silver;
+}
+
+.example-div {
+    position: relative;
+    margin-top: 49px;
+    background: url("/assets/Images/background1.jpg") no-repeat;
+    background-size: cover;
+    height: auto;
+    width: 100%;
+    min-height: 899px;
+}
+
+.example-card {
+    width: 400px;
+    margin-top: 19px;
+    margin-bottom: 19px;
+    background-color: mistyrose;
+}
+
+mat-card-header {
+    border-bottom: 1px solid purple;
+}
+
+#img1 {
+    height: 249px;
+    margin-top: 9px;
+}
+
+mat-card-content {
+    height: 99px;
+    margin-top: 19px;
+}
+
+mat-card-actions {
+    border-top: 1px solid green;
+}
+
+mat-card-actions button {
+    width: 100%;
+    float: left;
+    margin-top: 4px;
+}
+
+.button1 {
+    position: relative;
+    left: -9px;
+}
+
+.example-button {
+    margin-top: 19px;
+    margin-left: 251px;
+    width: 68%;
+    min-width: auto;
+    background: green;
+}
+
+.example-footer {
+    position: absolute;
+    bottom: -119px;
+    height: 119px;
+    width: 100%;
+    background: black;
+    color: white;
+}
+
+.example-footer .text-center {
+    position: relative;
+    top: 39px;
+    font-size: 26px;
+}

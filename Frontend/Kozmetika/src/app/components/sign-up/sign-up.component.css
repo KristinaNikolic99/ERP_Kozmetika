@@ -1,0 +1,92 @@
+.example-div {
+    position: absolute;
+    bottom: 119px;
+    background: url('/assets/Images/background.jpg') no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .example-footer {
+    position: absolute;
+    bottom: 0;
+    height: 119px;
+    width: 100%;
+    background: black;
+    color: white;
+  }
+  
+  .text-center {
+    font-size: 26px;
+    margin-top: 39px;
+  }
+  
+  .sign-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 559px;
+    width: 549px;
+    background: rgb(255, 255, 255, 0.6);
+    transform: translate(-249px, -219px);
+    border-radius: 6px;
+  }
+  
+  .sign-header {
+    height: 99px;
+    background: white;
+    border-radius: 6px;
+    border-bottom: 1px solid black;
+  }
+  
+  img {
+    height: 91px;
+    width: 91px;
+    margin-top: 4px;
+    margin-left: 19px;
+  }
+  
+  .example-text {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 1.89vw;
+    color: black;
+  }
+
+  .example-error {
+    position: relative;
+    top: -74px;
+    left: 49px;
+    color: red;
+  }
+  
+  .form {
+    display: flex;
+  }
+  
+  mat-form-field {
+    font-size: 22px;
+    flex-grow: 1;
+    height: 74px;
+    margin-top: 6px;
+    margin-left: 69px;
+    margin-right: 29px;
+  }
+  
+  .example-icon {
+    position: absolute;
+    top: 9px;
+    left: -39px;
+    color: black;
+    font-size: 31px;
+  }
+  
+  .example-button {
+    position: relative;
+    top: 14px;
+    left: 29px;
+    font-size: 19px;
+    width: 90%;
+    border-radius: 19px;
+  }
+  
+  

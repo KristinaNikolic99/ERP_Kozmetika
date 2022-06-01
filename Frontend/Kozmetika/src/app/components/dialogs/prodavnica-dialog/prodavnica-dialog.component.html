@@ -1,0 +1,55 @@
+<div class="container">
+    <h1 mat-dialog-title *ngIf="flag == 1" class="title">Dodaj novu prodavnicu:</h1>
+    <h1 mat-dialog-title *ngIf="flag == 2" class="title">Modifikuj prodavnicu: {{data.ProdavnicaID}}</h1>
+    <h1 mat-dialog-title *ngIf="flag == 3" class="title">Obriši korisnika: {{data.ProdavnicaID}}</h1>
+  
+  
+    <form class="mat-dialog-content" #form="ngForm">
+      <div class="form mat-elevation-z8 col-lg-6">
+        <mat-form-field>
+          <input matInput type="text" [(ngModel)]="data.NazivProdavnice" name="NazivProdavnice" placeholder="NazivProdavnice"
+           [disabled]="flag == 3">
+        </mat-form-field>
+      </div>
+      <div class="form mat-elevation-z8 col-lg-6">
+        <mat-form-field>
+          <input matInput type="text" [(ngModel)]="data.Kontakt"  name="Kontakt" placeholder="Kontakt" 
+          [disabled]="flag == 3" required>
+        </mat-form-field>
+      </div>
+      <div class="form mat-elevation-z8 col-lg-12">
+        <mat-form-field>
+            <textarea matInput type="text" [(ngModel)]="data.Opis" name="Opis" [disabled]="flag == 3" 
+             placeholder="Opis" required></textarea>
+        </mat-form-field>
+      </div>
+      <div class="form mat-elevation-z8 col-lg-6">
+        <mat-form-field>
+          <input matInput type="text" [(ngModel)]="data.Adresa" name="Adresa" placeholder="Adresa" 
+          [disabled]="flag == 3" required>
+        </mat-form-field>
+      </div>
+      <div class="form mat-elevation-z8 col-lg-6">
+        <mat-form-field>
+          <input matInput type="text" [(ngModel)]="data.RadnoVreme" name="RadnoVreme" placeholder="RadnoVreme" 
+          [disabled]="flag == 3" required>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="col-lg-12">
+        <div class="col-lg-6">
+        <button mat-raised-button color="primary" *ngIf="flag == 1" [disabled]="!form.valid" (click)="add()">
+          Dodaj prodavnicu
+        </button>
+        <button mat-raised-button color="primary" *ngIf="flag == 2" [disabled]="!form.valid" (click)="update()">
+          Modifikuj prodavnicu
+        </button>
+        <button mat-raised-button color="primary" *ngIf="flag == 3" (click)="delete()">
+          Obriši prodavnicu
+        </button>
+        </div>
+        <div class="col-lg-6">
+          <button mat-raised-button color="warn" (click)="cancle()">Poništi</button>
+        </div>
+      </div>
+    </form>
+  </div>

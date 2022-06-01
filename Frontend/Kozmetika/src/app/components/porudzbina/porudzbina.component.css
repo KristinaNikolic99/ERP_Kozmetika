@@ -1,0 +1,89 @@
+.example-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    height: 49px;
+}
+
+.example-img {
+    height: 49px;
+    width: 59px;
+    margin-left: 39px;
+}
+
+span {
+    font-size: 24px;
+    font-family: cursive;
+    color: red;
+}
+
+.flex {
+    flex: 1 1 auto;
+}
+
+.example-p {
+    font-size: 24px;
+    font-family: cursive;
+    margin-top: 4px;
+    margin-right: 19px;
+    color: silver;
+}
+
+.example-div {
+    position: relative;
+    margin-top: 49px;
+    background: url("/assets/Images/background1.jpg") no-repeat;
+    background-size: cover;
+    height: auto;
+    width: 100%;
+    min-height: 899px;
+}
+
+.example-container {
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    margin-top: 99px;
+}
+
+table th {
+    text-align: center;
+    padding: 1px;
+}
+
+table td {
+    text-align: center;
+    border-left: 1px solid black;
+    padding: 3px;
+}
+
+table button {
+    float: left;
+}
+
+.mat-column-Kontakt {
+    width: 119px;
+}
+
+.mat-column-Actions {
+    width: 229px;
+}
+
+.example-footer {
+    position: relative;
+    bottom: 0;
+    height: 119px;
+    width: 100%;
+    background: black;
+    color: white;
+}
+
+.example-footer .text-center {
+    position: relative;
+    top: 39px;
+    font-size: 26px;
+}

@@ -1,0 +1,83 @@
+<mat-toolbar class="example-toolbar mat-elevation-z8 sticky-top">
+    <span>
+        <a href="home"><img src="/assets/Images/icon.jpg" class="example-img"></a>
+        Online kozmetika!
+    </span>
+    <div class="flex"></div>
+    <p class="example-p">{{korisnik.Username}}</p>
+    <button mat-raised-button color="warn" (click)="Logout()">Log out</button>
+</mat-toolbar>
+
+<div class="example-div">
+    <div class="example-container container">
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="StavkaPorudzbineID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>StavkaPorudzbineID</th>
+            <td mat-cell *matCellDef="let row">{{row.StavkaPorudzbineID}}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="ProizvodID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ProizvodID</th>
+            <td mat-cell *matCellDef="let row">{{row.ProizvodID}}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="NazivProizvoda">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>NazivProizvoda</th>
+            <td mat-cell *matCellDef="let row">
+              <div *ngFor="let p of proizvod">
+                <p *ngIf="p.ProizvodID == row.ProizvodID" style="margin-top: 7px;">{{p.NazivProizvoda}}</p>
+              </div>
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Cena">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Cena</th>
+            <td mat-cell *matCellDef="let row">
+              <div *ngFor="let p of proizvod">
+                <p *ngIf="p.ProizvodID == row.ProizvodID" style="margin-top: 7px;">{{p.Cena}}</p>
+              </div>
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="KolicinaProizvoda">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>KolicinaProizvoda</th>
+            <td mat-cell *matCellDef="let row">{{row.KolicinaProizvoda}}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Prodavnica">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Prodavnica</th>
+            <td mat-cell *matCellDef="let row">
+              <div *ngFor="let p of proizvod">
+                <div *ngIf="p.ProizvodID == row.ProizvodID">
+                      <div *ngFor="let pr of prodavnica">
+                        <p *ngIf="p.ProdavnicaID == pr.ProdavnicaID " style="margin-top: 7px;">
+                          {{pr.NazivProdavnice}} / {{pr.Kontakt}} / {{pr.Adresa}}
+                        </p>
+                      </div>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true"></mat-paginator>
+    </div>
+</div>
+
+<footer class="example-footer">
+    <div class="text-center">
+      © 2020 Copyright:
+      <a href="#"> Kozmetika.com</a>
+    </div>
+</footer>
+
+<ngx-spinner
+    bdColor = "rgba(0, 0, 0, 0.8)"
+    size = "medium" 
+    color = "#fff"
+    type = "ball-fussion"
+    >
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>

@@ -1,0 +1,81 @@
+<div class="container">
+    <h1 mat-dialog-title *ngIf="flag == 1" class="title">Dodaj novog korisnika:</h1>
+    <h1 mat-dialog-title *ngIf="flag == 2" class="title">Modifikuj korisnika: {{data.Username}}</h1>
+    <h1 mat-dialog-title *ngIf="flag == 3" class="title">Obriši korisnika: {{data.Username}}</h1>
+  
+  
+    <form class="mat-dialog-content" #form="ngForm">
+      <div class="form mat-elevation-z8 col-lg-6">
+        <mat-form-field>
+          <input matInput type="text" [(ngModel)]="data.Ime" name="Ime" placeholder="Ime" [disabled]="flag == 3">
+        </mat-form-field>
+      </div>
+      <div class="form mat-elevation-z8 col-lg-6">
+        <mat-form-field>
+          <input matInput type="text" [(ngModel)]="data.Prezime"  name="Prezime" placeholder="Prezime" [disabled]="flag == 3">
+        </mat-form-field>
+      </div>
+      <div class="form mat-elevation-z8 col-lg-6">
+        <mat-form-field>
+          <mat-label>TipKorisnika</mat-label>
+          <mat-select [(ngModel)]="data.TipKorisnika" name="TipKorisnika" [disabled]="flag == 3">
+            <mat-option value="Administrator">Administrator</mat-option>
+            <mat-option value="Kupac">Kupac</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form mat-elevation-z8 col-lg-6">
+        <mat-form-field>
+          <input matInput type="email" [(ngModel)]="data.Email" name="Email" placeholder="Email" [disabled]="flag == 3" required>
+        </mat-form-field>
+      </div>
+      <div class="form mat-elevation-z8 col-lg-6">
+        <mat-form-field>
+          <input matInput type="text" [(ngModel)]="data.Kontakt" name="Kontakt" placeholder="Kontakt" [disabled]="flag == 3" required>
+        </mat-form-field>
+      </div>
+      <div class="form mat-elevation-z8 col-lg-6">
+        <mat-form-field>
+          <input matInput type="text" [(ngModel)]="data.Adresa" name="Adresa" placeholder="Adresa" [disabled]="flag == 3" required>
+        </mat-form-field>
+      </div>
+      <div class="form mat-elevation-z8 col-lg-6">
+        <mat-form-field>
+          <input matInput type="number" [(ngModel)]="data.BrojStana" name="BrojStana" placeholder="Broj stana" [disabled]="flag == 3" required>
+        </mat-form-field>
+      </div>
+      <div class="form mat-elevation-z8 col-lg-6">
+        <mat-form-field>
+          <input matInput type="text" [(ngModel)]="data.Username" name="Username" placeholder="Username" [disabled]="flag == 3" required>
+        </mat-form-field>
+      </div>
+      <div class="form mat-elevation-z8 col-lg-6">
+        <mat-form-field>
+          <input matInput type="text" [(ngModel)]="data.Password" name="Password" placeholder="Password" [disabled]="flag == 3" required>
+        </mat-form-field>
+      </div>
+      <div class="form mat-elevation-z8 col-lg-6">
+        <mat-form-field>
+          <input matInput type="number" [(ngModel)]="data.UkupnoStanjeBodova" name="UkupnoStanjeBodova"
+           placeholder="UkupnoStanjeBodova" [disabled]="flag == 3" required>
+        </mat-form-field>
+      </div>
+  
+      <div mat-dialog-actions class="col-lg-12">
+        <div class="col-lg-6">
+        <button mat-raised-button color="primary" *ngIf="flag == 1" [disabled]="!form.valid" (click)="add()">
+          Dodaj korisnika
+        </button>
+        <button mat-raised-button color="primary" *ngIf="flag == 2" [disabled]="!form.valid" (click)="update()">
+          Modifikuj korisnika
+        </button>
+        <button mat-raised-button color="primary" *ngIf="flag == 3" (click)="delete()">
+          Obriši korisnika
+        </button>
+        </div>
+        <div class="col-lg-6">
+          <button mat-raised-button color="warn" (click)="cancle()">Poništi</button>
+        </div>
+      </div>
+    </form>
+  </div>

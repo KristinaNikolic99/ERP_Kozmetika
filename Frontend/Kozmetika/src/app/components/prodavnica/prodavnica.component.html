@@ -1,0 +1,69 @@
+<mat-toolbar class="example-toolbar mat-elevation-z8 sticky-top">
+    <span>
+        <a href="home"><img src="/assets/Images/icon.jpg" class="example-img"></a>
+        Online kozmetika!
+    </span>
+    <div class="flex"></div>
+    <button mat-raised-button (click)="openDialogSlika()" *ngIf="korisnik.TipKorisnika == 'Administrator'" 
+    style="margin-right: 9px;">
+        Dodaj sliku prodavnice
+    </button>
+    <p class="example-p">{{korisnik.Username}}</p>
+    <button mat-raised-button color="warn" *ngIf="korisnik.TipKorisnika == 'Kupac' || korisnik.TipKorisnika == 'Administrator'" 
+    (click)="Logout()">Log out</button>
+    <button mat-raised-button color="warn" *ngIf="korisnik.TipKorisnika == 'Gost'" 
+    (click)="Login()">Log in</button>
+</mat-toolbar>
+
+<div class="example-div">
+    <button mat-raised-button *ngIf="korisnik.TipKorisnika == 'Administrator'" class="example-button" (click)="openDialog(1)">
+        Dodaj novu prodavnicu
+    </button>
+    <div class="col-lg-4" *ngFor="let p of prodavnica">
+        <mat-card class="container example-card mat-elevation-z8">
+            <mat-card-header>
+                <p *ngIf="korisnik.TipKorisnika == 'Administrator'">{{p.ProdavnicaID}}</p>
+                <mat-card-title>{{p.NazivProdavnice}}</mat-card-title>
+                <mat-card-subtitle>Adresa: {{p.Adresa}} <br> Kontakt: {{p.Kontakt}} <br> RadnoVreme: {{p.RadnoVreme}}</mat-card-subtitle>
+            </mat-card-header>
+            <ngb-carousel [interval]="3999" [showNavigationArrows]="false">
+                <div *ngFor="let sp of slika">
+                    <ng-template ngbSlide *ngIf="p.ProdavnicaID == sp.ProdavnicaID">
+                        <img id="img1" mat-card-image class="mat-elevation-z8" src="assets/Images/SlikeProdavnice/{{sp.Putanja}}">
+                    </ng-template>
+                </div>
+            </ngb-carousel>
+            <mat-card-content>
+                <p>{{p.Opis}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="proizvod(p.ProdavnicaID)">Proizvodi</button>
+                <button mat-raised-button *ngIf="korisnik.TipKorisnika == 'Administrator'" class="button1" (click)="openDialog(2,
+                p.ProdavnicaID, p.NazivProdavnice, p.Kontakt, p.Opis, p.Adresa, p.RadnoVreme, p.GradID)">
+                    Modifikacija
+                </button>
+                <button mat-raised-button *ngIf="korisnik.TipKorisnika == 'Administrator'" class="button1" (click)="openDialog(3,
+                p.ProdavnicaID, p.NazivProdavnice, p.Kontakt, p.Opis, p.Adresa, p.RadnoVreme, p.GradID)">
+                    Brisanje
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <footer class="example-footer">
+        <div class="text-center">
+          © 2022 Copyright:
+          <a href="#"> Kozmetika.com</a>
+        </div>
+    </footer>
+</div>
+
+
+
+<ngx-spinner
+    bdColor = "rgba(0, 0, 0, 0.8)"
+    size = "medium" 
+    color = "#fff"
+    type = "ball-fussion"
+    >
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
