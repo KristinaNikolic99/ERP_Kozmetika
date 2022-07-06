@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { Porudzbina } from 'src/app/models/Porudzbina/porudzbina';
 import { KorisnikService } from 'src/app/services/Korisnik/korisnik.service';
 import { Korisnik } from 'src/app/models/Korisnik/korisnik';
+import { StripeService } from 'src/app/services/Stripe/stripe.service';
 
 @Component({
   selector: 'app-stavke',
@@ -29,9 +30,11 @@ export class StavkeComponent implements OnInit {
   dataSource: MatTableDataSource<StavkaPorudzbine>;
   @ViewChild(MatPaginator, null) paginator: MatPaginator;
   @ViewChild(MatSort, null) sort: MatSort;
+  handler: any = null;
   constructor(private stavkaPorudzbineService: StavkaPorudzbineService, private proizvodService: ProizvodService,
               private porudzbinaService: PorudzbinaService, private korisnikService: KorisnikService,
-              private spinner: NgxSpinnerService, private toastr: ToastrService, private router: Router) { }
+              private spinner: NgxSpinnerService, private toastr: ToastrService, private router: Router,
+              private stripeService: StripeService) { }
 
   ngOnInit() {
     this.korisnik = new Korisnik;
@@ -45,6 +48,7 @@ export class StavkeComponent implements OnInit {
       this.proizvod = data;
     });
     this.loadData();
+    this.loadStripe();
   }
 
   loadData() {
@@ -70,12 +74,18 @@ export class StavkeComponent implements OnInit {
     }
   }
 
-  addPorudzbina(komentar: string) {
+  addPorudzbina(komentar: string, tipPlacanja: string) {
     this.porudzbina = new Porudzbina;
     this.porudzbina.PorudzbinaID = -1;
     this.porudzbina.CenaPorudzbine = this.proizvodCena;
-    this.porudzbina.Isplata = false;
-    this.porudzbina.Zahtev = false;
+    if(tipPlacanja == "Gotovina") {
+      this.porudzbina.Isplata = false;
+      this.porudzbina.Zahtev = false;
+    }
+    else if(tipPlacanja == "Kartica") {
+      this.porudzbina.Isplata = true;
+      this.porudzbina.Zahtev = true;
+    }
     this.porudzbina.Komentar = komentar;
     this.porudzbina.KorisnikID = this.korisnik.KorisnikID;
     this.porudzbinaService.addPorudzbina(this.porudzbina);
@@ -120,6 +130,58 @@ export class StavkeComponent implements OnInit {
       this.spinner.hide();
       this.router.navigate(['/signin']);
     }, 999);
+  }
+
+  pay(amount: any, komentar: string, tipPlacanja: string) {
+    if(tipPlacanja == undefined)
+    {
+      this.toastr.error("Potrebno je da odaberete nacin placanja");
+      return;
+    }
+    if(tipPlacanja == "Gotovina")
+    {
+      this.addPorudzbina(komentar, tipPlacanja);
+      return;
+    }
+    var handler = (<any>window).StripeCheckout.configure({
+      key: 'pk_test_51L8LnFCNYvKNBZ1T0oY8kKgUZyhjyDZNEaF84g5XXqfvNfzbpFFEzEF3m8NED4JBa0gNlqF7Dx2NsHbNw0JvEY8v00oUweGQ5x',
+      locale: 'auto',
+      token: (token: any) => {
+        var order = "Porudzbina od strane korisnika " +  this.korisnik.Username + ", email-" + this.korisnik.Email + 
+        " je uspesno izvrsena i iznosi " + amount + " dinara";
+        this.stripeService.takePayment(order, amount*100, token);
+        this.addPorudzbina(komentar, tipPlacanja);
+      }
+    });
+    handler.open({
+      name: 'Credit card',
+      description: 'Please insert your data',
+      currency: 'rsd',
+      amount: amount * 100
+    });
+ 
+  }
+
+  loadStripe() {
+    if(!window.document.getElementById('stripe-script')) {
+      var s = window.document.createElement("script");
+      s.id = "stripe-script";
+      s.type = "text/javascript";
+      s.src = "https://checkout.stripe.com/checkout.js";
+      s.onload = () => {
+        this.handler = (<any>window).StripeCheckout.configure({
+          key: 'pk_test_51L8LnFCNYvKNBZ1T0oY8kKgUZyhjyDZNEaF84g5XXqfvNfzbpFFEzEF3m8NED4JBa0gNlqF7Dx2NsHbNw0JvEY8v00oUweGQ5x',
+          locale: 'auto',
+          token: function (token: any) {
+            // You can access the token ID with `token.id`.
+            // Get the token ID to your server-side code for use.
+            console.log(token)
+            alert('Payment Success!!');
+          }
+        });
+      }
+      window.document.body.appendChild(s);
+    }
   }
 
 }
